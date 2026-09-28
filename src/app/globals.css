@@ -2,9 +2,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #050b1f;
-  --color-panel: #0a1430;
-  --color-borderline: #1e293b;
+  --color-bg: #f8fafc;
+  --color-panel: #ffffff;
+  --color-borderline: #e2e8f0;
   --font-sans: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
@@ -13,8 +13,8 @@
   --animate-fade-up: fadeUp 0.4s ease;
 
   @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
-    50% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
   }
   @keyframes slideIn {
     from { opacity: 0; transform: translateX(20px); }
@@ -26,7 +26,7 @@
   }
 }
 
-/* ─────────── BASE ─────────── */
+/* ─────────── BASE (OFFICIAL WHITE GOI THEME) ─────────── */
 * {
   font-family: "Inter", sans-serif;
   box-sizing: border-box;
@@ -34,20 +34,21 @@
 
 html,
 body {
-  background: #050b1f;
-  color: #f8fafc;
+  background: #f8fafc;
+  color: #0f172a;
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
 }
 
 body {
+  background-color: #f8fafc;
   background-image:
-    radial-gradient(circle at 15% 10%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 85% 90%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+    radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(245, 158, 11, 0.05) 0%, transparent 40%),
+    linear-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -58,14 +59,14 @@ body {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a1a3a;
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e40af;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
+  background: #94a3b8;
 }
 
 /* ─────────── MONO ─────────── */
@@ -73,13 +74,12 @@ body {
   font-family: "JetBrains Mono", monospace;
 }
 
-/* ─────────── GLASS CARDS ─────────── */
+/* ─────────── GLASS / GOI PORTAL CARDS ─────────── */
 .glass {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
 }
 
 .glass-hover {
@@ -87,23 +87,23 @@ body {
 }
 
 .glass-hover:hover {
-  border-color: rgba(37, 99, 235, 0.6);
-  box-shadow: 0 0 30px rgba(37, 99, 235, 0.15);
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
   transform: translateY(-2px);
 }
 
 /* ─────────── GLOWS ─────────── */
 .glow-blue {
-  box-shadow: 0 0 25px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
 }
 .glow-red {
-  box-shadow: 0 0 25px rgba(239, 68, 68, 0.5);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
 }
 .glow-green {
-  box-shadow: 0 0 25px rgba(16, 185, 129, 0.45);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
 }
 .glow-amber {
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.45);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);
 }
 
 /* ─────────── MARQUEE ─────────── */

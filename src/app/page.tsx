@@ -1,5 +1,7 @@
 "use client";
+
 import { useState } from "react";
+import { ProjectProvider, useProjects } from "./lib/store";
 import TopBar from "./components/TopBar";
 import Sidebar, { PageKey } from "./components/Sidebar";
 import LandingPage from "./components/LandingPage";
@@ -11,13 +13,26 @@ import MCPPage from "./components/MCPPage";
 import Impact from "./components/Impact";
 import Challenges from "./components/Challenges";
 import References from "./components/References";
+import Login from "./components/Login";
+import AddProjectModal from "./components/AddProjectModal";
 
-export default function Home() {
+function AppContent() {
+  const { user, selectedProjectId, setSelectedProjectId } = useProjects();
   const [page, setPage] = useState<PageKey>("landing");
-  const [projectId, setProjectId] = useState<string | null>(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+  // Task 1: If no user logged in, render Login page
+  if (!user) {
+    return (
+      <>
+        <TopBar />
+        <Login />
+      </>
+    );
+  }
 
   const handleSelectProject = (id: string) => {
-    setProjectId(id);
+    setSelectedProjectId(id);
     setPage("project");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -27,19 +42,27 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleAddProjectSuccess = (newProjectId: string) => {
+    handleSelectProject(newProjectId);
+  };
+
   return (
     <>
       <TopBar />
       <div className="max-w-[1600px] mx-auto px-6 py-6 flex gap-6">
-        <Sidebar current={page} onNavigate={handleNavigate} />
+        <Sidebar
+          current={page}
+          onNavigate={handleNavigate}
+          onOpenAddProject={() => setIsAddModalOpen(true)}
+        />
         <main className="flex-1 min-w-0">
           {page === "landing" && <LandingPage onNavigate={handleNavigate} />}
           {page === "dashboard" && (
             <Dashboard onSelectProject={handleSelectProject} />
           )}
-          {page === "project" && projectId && (
+          {page === "project" && selectedProjectId && (
             <ProjectDetail
-              projectId={projectId}
+              projectId={selectedProjectId}
               onBack={() => handleNavigate("dashboard")}
             />
           )}
@@ -51,6 +74,21 @@ export default function Home() {
           {page === "references" && <References />}
         </main>
       </div>
+
+      {/* Task 3 & 11: Global Add Project Modal */}
+      <AddProjectModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSuccess={handleAddProjectSuccess}
+      />
     </>
+  );
+}
+
+export default function Home() {
+  return (
+    <ProjectProvider>
+      <AppContent />
+    </ProjectProvider>
   );
 }
