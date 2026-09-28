@@ -1,26 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-bg: #050b1f;
+  --color-panel: #0a1430;
+  --color-borderline: #1e293b;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --animate-pulse-glow: pulseGlow 1.8s infinite;
+  --animate-slide-in: slideIn 0.4s ease;
+  --animate-fade-up: fadeUp 0.4s ease;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+    50% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
+/* ─────────── BASE ─────────── */
+* {
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #050b1f;
+  color: #f8fafc;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* ─────────── SCROLLBAR ─────────── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a1a3a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e40af;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* ─────────── MONO ─────────── */
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* ─────────── GLASS CARDS ─────────── */
+.glass {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 16px;
+}
+
+.glass-hover {
+  transition: all 0.3s ease;
+}
+
+.glass-hover:hover {
+  border-color: rgba(37, 99, 235, 0.6);
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.15);
+  transform: translateY(-2px);
+}
+
+/* ─────────── GLOWS ─────────── */
+.glow-blue {
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.45);
+}
+.glow-red {
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.5);
+}
+.glow-green {
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.45);
+}
+.glow-amber {
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.45);
+}
+
+/* ─────────── MARQUEE ─────────── */
+.marquee {
+  display: inline-flex;
+  animation: marqueeAnim 30s linear infinite;
+}
+
+@keyframes marqueeAnim {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ─────────── ANIMATIONS (global fallbacks) ─────────── */
+@keyframes slideInKey {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeUpKey {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
