@@ -759,6 +759,7 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
             </span>
           </div>
 
+
           {/* Comparison Matrix */}
           <div className="glass overflow-hidden border border-slate-200 bg-white shadow-xs rounded-xl">
             <div className="grid grid-cols-2">
