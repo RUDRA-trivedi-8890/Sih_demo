@@ -15,8 +15,17 @@ import {
   ZAxis,
 } from "recharts";
 import AnimatedCounter from "./AnimatedCounter";
+import IndiaFlag from "./IndiaFlag";
 import { useProjects } from "@/app/lib/store";
 import { riskColor } from "@/app/lib/utils";
+import {
+  Radio,
+  Search,
+  ChevronRight,
+  AlertCircle,
+  AlertTriangle,
+  ArrowRight,
+} from "lucide-react";
 
 export default function Dashboard({
   onSelectProject,
@@ -87,7 +96,7 @@ export default function Dashboard({
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF9933] via-[#0B193C] to-[#138808]" />
         <div>
           <div className="flex items-center gap-2.5 mb-1 pt-1">
-            <span className="text-xl">🇮🇳</span>
+            <IndiaFlag className="w-5 h-3.5" />
             <h2 className="text-2xl font-black text-[#0B193C] font-sans tracking-tight">
               Mission Control — National Risk Governance
             </h2>
@@ -254,7 +263,8 @@ export default function Dashboard({
       <div className="glass p-3.5 mb-6 overflow-hidden border border-amber-200 bg-amber-50/50 shadow-xs">
         <div className="flex items-center gap-4">
           <div className="text-xs font-bold text-amber-900 shrink-0 flex items-center gap-1.5 font-mono">
-            <span>🌾 TIER-3 GOI SENSITIVITY FEED:</span>
+            <Radio className="w-3.5 h-3.5 text-amber-700" />
+            <span>TIER-3 GOI SENSITIVITY FEED:</span>
           </div>
           <div className="overflow-hidden flex-1">
             <div className="flex gap-8 marquee whitespace-nowrap text-xs">
@@ -288,12 +298,15 @@ export default function Dashboard({
                 Displaying {filteredProjects.length} registered projects sorted by risk priority
               </div>
             </div>
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="🔍 Search project, ministry, state..."
-              className="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-blue-600"
-            />
+            <div className="relative">
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search project, ministry, state..."
+                className="bg-slate-50 border border-slate-300 rounded-xl pl-8 pr-3.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-blue-600 transition-colors"
+              />
+            </div>
           </div>
 
           <div className="overflow-x-auto max-h-[520px] overflow-y-auto">
@@ -350,9 +363,10 @@ export default function Dashboard({
                       <td className="py-3 px-2.5 text-center">
                         <button
                           onClick={() => onSelectProject(p.id)}
-                          className="text-[10px] font-bold px-3 py-1 rounded-lg bg-[#0B193C] text-white hover:bg-blue-900 transition-all shadow-xs"
+                          className="text-[10px] font-bold px-3 py-1 rounded-lg bg-[#0B193C] text-white hover:bg-blue-900 transition-all shadow-xs inline-flex items-center gap-1 cursor-pointer"
                         >
-                          Inspect SHAP →
+                          <span>Inspect SHAP</span>
+                          <ChevronRight className="w-3 h-3 text-blue-200" />
                         </button>
                       </td>
                     </tr>
@@ -389,15 +403,23 @@ export default function Dashboard({
               >
                 <div className="flex items-center justify-between mb-1">
                   <div
-                    className="text-[10px] font-black tracking-wider uppercase"
+                    className="text-[10px] font-black tracking-wider uppercase flex items-center gap-1.5"
                     style={{
                       color: a.level === "high" ? "#B91C1C" : "#B45309",
                     }}
                   >
-                    {a.level === "high" ? "🔥 CATEGORY-A CRITICAL ALERT" : "⚠️ CATEGORY-B WARNING"} (SCORE: {a.score})
+                    {a.level === "high" ? (
+                      <AlertCircle className="w-3.5 h-3.5 text-red-600 shrink-0" />
+                    ) : (
+                      <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    )}
+                    <span>
+                      {a.level === "high" ? "CATEGORY-A CRITICAL ALERT" : "CATEGORY-B WARNING"} (SCORE: {a.score})
+                    </span>
                   </div>
-                  <span className="text-[10px] text-blue-700 group-hover:underline font-bold">
-                    View Record →
+                  <span className="text-[10px] text-blue-700 group-hover:underline font-bold inline-flex items-center gap-0.5">
+                    <span>View Record</span>
+                    <ArrowRight className="w-2.5 h-2.5" />
                   </span>
                 </div>
                 <div className="text-xs font-bold text-slate-900 mb-1">

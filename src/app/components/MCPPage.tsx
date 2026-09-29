@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useProjects } from "@/app/lib/store";
 import { generateMcpAnalysis } from "@/app/lib/mcp";
 import { runFullPrediction } from "@/app/lib/predict";
+import { Wrench, Bot, CheckCircle2, Check } from "lucide-react";
 
 export default function MCPPage() {
   const { projects } = useProjects();
@@ -123,7 +124,10 @@ export default function MCPPage() {
         <div className="glass p-5 border-t-4 border-blue-600 bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
           <div>
             <div className="text-sm font-bold text-blue-900 mb-3 flex items-center justify-between">
-              <span>🛠️ EXECUTED MCP TOOLS</span>
+              <span className="flex items-center gap-1.5">
+                <Wrench className="w-4 h-4 text-blue-900" />
+                <span>EXECUTED MCP TOOLS</span>
+              </span>
               <span className="text-[10px] font-mono text-blue-700 font-bold">
                 {toolStep}/{mcp?.toolsExecuted.length || 0} Active
               </span>
@@ -145,8 +149,9 @@ export default function MCPPage() {
                         {t.tool}
                       </span>
                       {isLit && (
-                        <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded border border-emerald-300">
-                          ✓ ACTIVE
+                        <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded border border-emerald-300 flex items-center gap-0.5">
+                          <Check className="w-2.5 h-2.5 text-emerald-700" />
+                          <span>ACTIVE</span>
                         </span>
                       )}
                     </div>
@@ -164,8 +169,9 @@ export default function MCPPage() {
         {/* Column 2: LLM Agent */}
         <div className="glass p-5 border-t-4 border-purple-600 bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
           <div>
-            <div className="text-sm font-bold text-purple-900 mb-3 text-center">
-              🤖 LLM GOVERNANCE REASONING
+            <div className="text-sm font-bold text-purple-900 mb-3 text-center flex items-center justify-center gap-1.5">
+              <Bot className="w-4 h-4 text-purple-900" />
+              <span>LLM GOVERNANCE REASONING</span>
             </div>
             <div className="p-4 rounded-xl bg-purple-50 border border-purple-200 space-y-3">
               <div className="text-xs text-slate-800 leading-relaxed font-medium">
@@ -190,7 +196,10 @@ export default function MCPPage() {
         <div className="glass p-5 border-t-4 border-emerald-600 bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
           <div>
             <div className="text-sm font-bold text-emerald-900 mb-3 flex items-center justify-between">
-              <span>✅ MANDATED DIRECTIVES</span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-900" />
+                <span>MANDATED DIRECTIVES</span>
+              </span>
               <span className="text-[10px] font-mono text-emerald-700 font-bold">
                 {actionStep}/{mcp?.recommendedActions.length || 0}
               </span>
@@ -207,7 +216,7 @@ export default function MCPPage() {
                         : "bg-slate-50 border-slate-200 opacity-30"
                     }`}
                   >
-                    <span className="text-emerald-700 font-bold shrink-0">✓</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 shrink-0 mt-0.5" />
                     <span>{action}</span>
                   </div>
                 );

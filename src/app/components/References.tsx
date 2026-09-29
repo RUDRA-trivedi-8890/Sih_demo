@@ -1,9 +1,12 @@
 "use client";
 
+import { Building2, Cpu, BookOpen, ExternalLink } from "lucide-react";
+
 export default function References() {
   const groups = [
     {
-      title: "🏛️ GOVERNMENT POLICY & DATA ECOSYSTEM",
+      icon: Building2,
+      title: "GOVERNMENT POLICY & DATA ECOSYSTEM",
       items: [
         {
           label: "MoSPI — Infrastructure & Project Monitoring Division (IPMD)",
@@ -16,7 +19,8 @@ export default function References() {
       ],
     },
     {
-      title: "🧠 PREDICTIVE ML & MODEL EXPLAINABILITY (XAI)",
+      icon: Cpu,
+      title: "PREDICTIVE ML & MODEL EXPLAINABILITY (XAI)",
       items: [
         {
           label: "A Unified Approach to Interpreting Model Predictions",
@@ -29,7 +33,8 @@ export default function References() {
       ],
     },
     {
-      title: "📐 INFRASTRUCTURE RISK & COST ESCALATION LITERATURE",
+      icon: BookOpen,
+      title: "INFRASTRUCTURE RISK & COST ESCALATION LITERATURE",
       items: [
         {
           label: "Megaprojects and Risk: An Anatomy of Ambition",
@@ -55,31 +60,36 @@ export default function References() {
       </div>
 
       <div className="space-y-5 mb-6">
-        {groups.map((g, i) => (
-          <div key={i} className="glass p-5">
-            <div className="text-sm font-bold text-blue-300 tracking-wider mb-3">
-              {g.title}
-            </div>
-            <div className="space-y-3">
-              {g.items.map((it, j) => (
-                <div
-                  key={j}
-                  className="p-3 rounded-lg bg-slate-900/40 border-l-2 border-blue-500/40"
-                >
-                  <div className="text-sm font-semibold text-slate-200">
-                    {it.label}
+        {groups.map((g, i) => {
+          const Icon = g.icon;
+          return (
+            <div key={i} className="glass p-5">
+              <div className="text-sm font-bold text-blue-300 tracking-wider mb-3 flex items-center gap-2">
+                <Icon className="w-4 h-4 text-blue-400" />
+                <span>{g.title}</span>
+              </div>
+              <div className="space-y-3">
+                {g.items.map((it, j) => (
+                  <div
+                    key={j}
+                    className="p-3 rounded-lg bg-slate-900/40 border-l-2 border-blue-500/40"
+                  >
+                    <div className="text-sm font-semibold text-slate-200">
+                      {it.label}
+                    </div>
+                    <div className="text-xs text-slate-400 mt-1">{it.desc}</div>
                   </div>
-                  <div className="text-xs text-slate-400 mt-1">{it.desc}</div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="glass p-5 border-l-4 border-emerald-500">
-        <div className="text-sm font-bold text-emerald-300 mb-3">
-          🔗 VERIFICATION LINKS & OPEN REPOSITORIES
+        <div className="text-sm font-bold text-emerald-300 mb-3 flex items-center gap-2">
+          <ExternalLink className="w-4 h-4 text-emerald-400" />
+          <span>VERIFICATION LINKS & OPEN REPOSITORIES</span>
         </div>
         <div className="space-y-2 text-xs">
           <div className="flex flex-wrap gap-2">

@@ -2,6 +2,16 @@
 
 import { useState } from "react";
 import { useProjects, Role } from "@/app/lib/store";
+import IndiaFlag from "./IndiaFlag";
+import {
+  HardHat,
+  Building2,
+  ShieldCheck,
+  AlertTriangle,
+  Lock,
+  ArrowRight,
+  ShieldAlert,
+} from "lucide-react";
 
 export default function Login() {
   const { login } = useProjects();
@@ -27,14 +37,14 @@ export default function Login() {
     <div className="min-h-[85vh] flex items-center justify-center py-10 px-4 animate-[fadeUp_0.4s_ease]">
       <div className="w-full max-w-2xl">
         {/* Main Official White Card */}
-        <div className="glass p-8 relative overflow-hidden border border-slate-200 shadow-xl bg-white">
+        <div className="glass p-8 relative overflow-hidden border border-slate-200 shadow-xl bg-white rounded-2xl">
           {/* Top Tricolor Strip */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF9933] via-[#0B193C] to-[#138808]" />
 
           {/* Header */}
           <div className="mb-6 text-center pt-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-300 text-amber-900 text-xs font-bold mb-3">
-              <span>🇮🇳</span>
+              <IndiaFlag className="w-4 h-3" />
               <span>GOVERNMENT OF INDIA • PM GATI SHAKTI PORTAL</span>
             </div>
             <h1 className="text-3xl font-black text-[#0B193C] tracking-tight font-sans">
@@ -46,8 +56,9 @@ export default function Login() {
           </div>
 
           {error && (
-            <div className="mb-5 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs text-center font-medium animate-pulse">
-              ⚠️ {error}
+            <div className="mb-5 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs text-center font-medium animate-pulse flex items-center justify-center gap-2">
+              <AlertTriangle className="w-4 h-4 text-red-600 shrink-0" />
+              <span>{error}</span>
             </div>
           )}
 
@@ -61,13 +72,13 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => handleQuickLogin("contractor")}
-                className="p-4 rounded-xl bg-amber-50/50 border border-amber-200 hover:border-amber-400 hover:bg-amber-100/60 transition-all text-left group shadow-sm"
+                className="p-4 rounded-xl bg-amber-50/50 border border-amber-200 hover:border-amber-400 hover:bg-amber-100/60 transition-all text-left group shadow-xs cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-1.5">
                   <span className="text-xs font-black text-amber-900">
                     Contractor Agent
                   </span>
-                  <span className="text-sm">🏗️</span>
+                  <HardHat className="w-4 h-4 text-amber-700" />
                 </div>
                 <div className="text-[10px] text-slate-600 leading-tight mb-2">
                   Submit site progress, financial logs & PAIMANA data
@@ -80,13 +91,13 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => handleQuickLogin("officer")}
-                className="p-4 rounded-xl bg-blue-50/50 border border-blue-200 hover:border-blue-400 hover:bg-blue-100/60 transition-all text-left group shadow-sm"
+                className="p-4 rounded-xl bg-blue-50/50 border border-blue-200 hover:border-blue-400 hover:bg-blue-100/60 transition-all text-left group shadow-xs cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-1.5">
                   <span className="text-xs font-black text-blue-950">
                     Nodal Officer
                   </span>
-                  <span className="text-sm">🏛️</span>
+                  <Building2 className="w-4 h-4 text-blue-700" />
                 </div>
                 <div className="text-[10px] text-slate-600 leading-tight mb-2">
                   View Mission Control, SHAP drivers & run ML analysis
@@ -99,13 +110,13 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => handleQuickLogin("admin")}
-                className="p-4 rounded-xl bg-purple-50/50 border border-purple-200 hover:border-purple-400 hover:bg-purple-100/60 transition-all text-left group shadow-sm"
+                className="p-4 rounded-xl bg-purple-50/50 border border-purple-200 hover:border-purple-400 hover:bg-purple-100/60 transition-all text-left group shadow-xs cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-1.5">
                   <span className="text-xs font-black text-purple-950">
                     Director General
                   </span>
-                  <span className="text-sm">⚡</span>
+                  <ShieldCheck className="w-4 h-4 text-purple-700" />
                 </div>
                 <div className="text-[10px] text-slate-600 leading-tight mb-2">
                   Full portfolio governance & execute MCP playbooks
@@ -158,17 +169,20 @@ export default function Login() {
 
             <button
               type="submit"
-              className="w-full py-3 px-4 rounded-xl bg-[#0B193C] hover:bg-blue-900 text-white font-bold text-sm shadow-md transition-all transform active:scale-[0.99] flex items-center justify-center gap-2"
+              className="w-full py-3 px-4 rounded-xl bg-[#0B193C] hover:bg-blue-900 text-white font-bold text-sm shadow-md transition-all transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Authenticate GOI Single Sign-On →</span>
+              <Lock className="w-4 h-4 text-blue-200" />
+              <span>Authenticate GOI Single Sign-On</span>
+              <ArrowRight className="w-4 h-4 text-blue-200" />
             </button>
           </form>
 
           {/* Official Security Disclaimer */}
           <div className="mt-8 pt-5 border-t border-slate-200">
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-[10px] text-slate-600 space-y-1">
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-[10px] text-slate-600 space-y-1">
               <div className="flex items-center gap-2 text-amber-800 font-bold">
-                <span>🛡️ OFFICIAL GOVERNMENT NOTICE</span>
+                <ShieldAlert className="w-4 h-4 text-amber-800 shrink-0" />
+                <span>OFFICIAL GOVERNMENT NOTICE</span>
               </div>
               <p className="leading-relaxed">
                 This portal is hosted under the PM Gati Shakti Infrastructure Governance Framework. Unauthorized access or tampering with risk prediction parameters is punishable under Section 66 of the Information Technology Act 2000.

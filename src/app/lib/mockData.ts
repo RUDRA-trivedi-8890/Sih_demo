@@ -162,13 +162,13 @@ export function getProjectById(id: string): Project | undefined {
 }
 
 export const PIPELINE_STEPS = [
-  { icon: "📥", title: "PAIMANA / Project Data", sub: "API / Raw CSV" },
-  { icon: "🗄️", title: "Ingestion & Validation", sub: "Schema + quality checks" },
-  { icon: "🧹", title: "Data Cleaning", sub: "Master Dataset" },
-  { icon: "⚙️", title: "Feature Engineering", sub: "CUF + variables" },
-  { icon: "📐", title: "Statistical Baseline", sub: "OLS / ARIMA" },
-  { icon: "🤖", title: "ML Models", sub: "Cost + Time" },
-  { icon: "🎲", title: "Risk Scoring Engine", sub: "0 – 100" },
-  { icon: "🔍", title: "SHAP Explainability", sub: "Attribution Logic" },
-  { icon: "📊", title: "Dashboard & Alerts", sub: "Web + Mobile" },
+  { step: "01", iconKey: "ingest", title: "PAIMANA / Project Data", sub: "API / Raw CSV" },
+  { step: "02", iconKey: "validation", title: "Ingestion & Validation", sub: "Schema + quality checks" },
+  { step: "03", iconKey: "clean", title: "Data Cleaning", sub: "Master Dataset" },
+  { step: "04", iconKey: "feature", title: "Feature Engineering", sub: "CUF + variables" },
+  { step: "05", iconKey: "baseline", title: "Statistical Baseline", sub: "OLS / ARIMA" },
+  { step: "06", iconKey: "ml", title: "ML Models", sub: "Cost + Time" },
+  { step: "07", iconKey: "risk", title: "Risk Scoring Engine", sub: "0 – 100" },
+  { step: "08", iconKey: "explain", title: "SHAP Explainability", sub: "Attribution Logic" },
+  { step: "09", iconKey: "dashboard", title: "Dashboard & Alerts", sub: "Web + Mobile" },
 ];

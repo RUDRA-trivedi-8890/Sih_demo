@@ -2,6 +2,7 @@
 import AnimatedCounter from "./AnimatedCounter";
 import { PageKey } from "./Sidebar";
 import StateChoroplethMap from "./StateChoroplethMap";
+import { ArrowRight, ChevronDown, CheckCircle2 } from "lucide-react";
 
 export default function LandingPage({
   onNavigate,
@@ -43,18 +44,20 @@ export default function LandingPage({
         <div className="flex items-center justify-center gap-4 flex-wrap">
           <button
             onClick={() => onNavigate("dashboard")}
-            className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 font-bold text-white text-base shadow-md hover:shadow-lg transition-all"
+            className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 font-bold text-white text-base shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer transform active:scale-[0.99]"
           >
-            Launch Mission Control →
+            <span>Launch Mission Control</span>
+            <ArrowRight className="w-4 h-4 text-blue-100" />
           </button>
           <button
             onClick={() => {
               const el = document.getElementById("state-map-section");
               el?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="px-6 py-3.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 font-bold text-slate-800 text-base shadow-2xs transition-all"
+            className="px-6 py-3.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 font-bold text-slate-800 text-base shadow-2xs transition-all flex items-center gap-2 cursor-pointer"
           >
-            Explore State-wise Map ↓
+            <span>Explore State-wise Map</span>
+            <ChevronDown className="w-4 h-4 text-slate-500" />
           </button>
         </div>
       </div>
@@ -119,23 +122,27 @@ export default function LandingPage({
         <div className="text-sm font-bold text-blue-900 mb-3 tracking-wider uppercase">
           CORE CAPABILITIES
         </div>
-        <ul className="grid md:grid-cols-2 gap-3 text-sm text-slate-700">
-          <li className="flex gap-2">
-            <span className="text-emerald-600 font-bold">▸</span> Cost-overrun &
-            schedule-overrun risk predicted{" "}
-            <b className="text-slate-900">before escalation</b>
+        <ul className="grid md:grid-cols-2 gap-3.5 text-sm text-slate-700">
+          <li className="flex items-start gap-2.5">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <span>
+              Cost-overrun & schedule-overrun risk predicted{" "}
+              <b className="text-slate-900">before escalation</b>
+            </span>
           </li>
-          <li className="flex gap-2">
-            <span className="text-emerald-600 font-bold">▸</span> Emerging implementation
-            bottlenecks identified early
+          <li className="flex items-start gap-2.5">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <span>Emerging implementation bottlenecks identified early</span>
           </li>
-          <li className="flex gap-2">
-            <span className="text-emerald-600 font-bold">▸</span> Explainable early
-            warnings for decision-makers
+          <li className="flex items-start gap-2.5">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <span>Explainable early warnings for decision-makers</span>
           </li>
-          <li className="flex gap-2">
-            <span className="text-emerald-600 font-bold">▸</span> Target:{" "}
-            <b className="text-slate-900">proactive 6–12 month advance warnings</b>
+          <li className="flex items-start gap-2.5">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <span>
+              Target: <b className="text-slate-900">proactive 6–12 month advance warnings</b>
+            </span>
           </li>
         </ul>
       </div>

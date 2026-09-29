@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useProjects, NewProjectInput } from "@/app/lib/store";
 import { Project } from "@/app/lib/mockData";
+import { X, FileSpreadsheet, UploadCloud, Cpu, ArrowRight } from "lucide-react";
 
 const MINISTRIES = [
   "MoRTH",
@@ -163,9 +164,10 @@ export default function AddProjectModal({
       <div className="glass w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 border border-slate-300 shadow-2xl bg-white relative rounded-2xl">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-lg font-bold"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+          aria-label="Close modal"
         >
-          ✕
+          <X className="w-5 h-5" />
         </button>
 
         <div className="mb-5">
@@ -185,15 +187,17 @@ export default function AddProjectModal({
           <div className="mb-6 p-4 rounded-xl bg-blue-50 border border-blue-200">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <div className="text-xs font-bold text-blue-950">
-                  📂 Import from PAIMANA / CSV
+                <div className="text-xs font-bold text-blue-950 flex items-center gap-1.5">
+                  <FileSpreadsheet className="w-4 h-4 text-blue-800" />
+                  <span>Import from PAIMANA / CSV</span>
                 </div>
                 <div className="text-[11px] text-slate-600 font-medium">
                   Simulate automated ingestion from Ministry PAIMANA dataset
                 </div>
               </div>
               <label className="cursor-pointer px-3.5 py-1.5 rounded-lg bg-[#0B193C] hover:bg-blue-900 text-white text-xs font-bold shadow-sm transition-all flex items-center gap-2">
-                <span>⚡ Upload PAIMANA CSV</span>
+                <UploadCloud className="w-4 h-4 text-blue-200" />
+                <span>Upload PAIMANA CSV</span>
                 <input
                   type="file"
                   accept=".csv"
@@ -404,9 +408,11 @@ export default function AddProjectModal({
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-xl bg-[#0B193C] hover:bg-blue-900 text-white font-bold shadow-md flex items-center gap-2"
+              className="px-6 py-2.5 rounded-xl bg-[#0B193C] hover:bg-blue-900 text-white font-bold shadow-md flex items-center gap-2 cursor-pointer transition-all transform active:scale-[0.99]"
             >
-              <span>Analyze with AI →</span>
+              <Cpu className="w-4 h-4 text-blue-200" />
+              <span>Compute ML Risk Assessment</span>
+              <ArrowRight className="w-4 h-4 text-blue-200" />
             </button>
           </div>
         </form>

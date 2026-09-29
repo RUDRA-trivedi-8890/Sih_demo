@@ -23,6 +23,7 @@ import {
   formatIndianCurrency,
   getChoroplethColor,
 } from "@/app/data/stateProjectsData";
+import IndiaFlag from "./IndiaFlag";
 
 interface MetricInfo {
   id: string;
@@ -218,13 +219,14 @@ export default function StateChoroplethMap() {
         <div className="flex items-center gap-2 flex-wrap">
           <button
             onClick={handleSelectNational}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all border ${
+            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all border ${
               activeStateData.id === "all"
                 ? "bg-slate-900 text-white border-slate-900 shadow-sm"
                 : "bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
             }`}
           >
-            🇮🇳 All-India Overview
+            <IndiaFlag className="w-4 h-2.5 rounded-[1px] shadow-2xs" />
+            <span>All-India Overview</span>
           </button>
           <button
             onClick={handleReset}
@@ -582,7 +584,7 @@ export default function StateChoroplethMap() {
                   }}
                   className="bg-white border border-slate-200 text-slate-800 font-semibold rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-blue-500 shadow-2xs"
                 >
-                  <option value="all">🇮🇳 All-India National Summary</option>
+                  <option value="all">All-India National Summary</option>
                   {Object.values(STATE_PROJECTS_MAP)
                     .sort((a, b) => a.stateName.localeCompare(b.stateName))
                     .map((s) => (

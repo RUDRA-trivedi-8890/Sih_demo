@@ -20,6 +20,24 @@ import { riskColor } from "@/app/lib/utils";
 import { runFullPrediction, generateShapDrivers } from "@/app/lib/predict";
 import { generateMcpAnalysis } from "@/app/lib/mcp";
 import AddProjectModal from "./AddProjectModal";
+import IndiaFlag from "./IndiaFlag";
+import {
+  ArrowLeft,
+  Printer,
+  FileEdit,
+  RefreshCw,
+  Building2,
+  HardHat,
+  MapPin,
+  SlidersHorizontal,
+  TrendingUp,
+  AlertTriangle,
+  Cpu,
+  Wrench,
+  CheckCircle2,
+  Check,
+  ChevronRight,
+} from "lucide-react";
 
 export default function ProjectDetail({
   projectId,
@@ -113,32 +131,35 @@ export default function ProjectDetail({
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4 print:hidden">
         <button
           onClick={onBack}
-          className="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-2 font-bold"
+          className="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1.5 font-bold cursor-pointer transition-colors"
         >
-          ← Back to National Mission Control
+          <ArrowLeft className="w-4 h-4 text-slate-500" />
+          <span>Back to National Mission Control</span>
         </button>
 
         <div className="flex items-center gap-2">
           <button
             onClick={handlePrintDossier}
-            className="px-3.5 py-1.5 rounded-xl bg-white border border-slate-300 text-slate-800 hover:bg-slate-100 text-xs font-bold transition-all shadow-xs flex items-center gap-1.5"
+            className="px-3.5 py-1.5 rounded-xl bg-white border border-slate-300 text-slate-800 hover:bg-slate-100 text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
           >
-            <span>🖨️ Print Governance Dossier</span>
+            <Printer className="w-3.5 h-3.5 text-slate-600" />
+            <span>Print Governance Dossier</span>
           </button>
 
           {isContractorOrAdmin && (
             <button
               onClick={() => setIsEditModalOpen(true)}
-              className="px-3.5 py-1.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-950 hover:bg-amber-100 text-xs font-bold transition-all shadow-xs flex items-center gap-1.5"
+              className="px-3.5 py-1.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-950 hover:bg-amber-100 text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
             >
-              <span>✏️ Update Progress & Logs</span>
+              <FileEdit className="w-3.5 h-3.5 text-amber-900" />
+              <span>Update Progress & Logs</span>
             </button>
           )}
 
           <button
             onClick={handleRunPrediction}
             disabled={isAnalyzing}
-            className="px-4 py-1.5 rounded-xl bg-[#0B193C] hover:bg-blue-900 text-white text-xs font-bold shadow-sm transition-all flex items-center gap-2"
+            className="px-4 py-1.5 rounded-xl bg-[#0B193C] hover:bg-blue-900 text-white text-xs font-bold shadow-sm transition-all flex items-center gap-2 cursor-pointer"
           >
             {isAnalyzing ? (
               <>
@@ -147,7 +168,8 @@ export default function ProjectDetail({
               </>
             ) : (
               <>
-                <span>⚡ Re-Analyze Risk with AI</span>
+                <RefreshCw className="w-3.5 h-3.5 text-blue-200" />
+                <span>Re-Analyze Risk Assessment</span>
               </>
             )}
           </button>
@@ -158,8 +180,8 @@ export default function ProjectDetail({
       {isAnalyzing && (
         <div className="glass p-8 mb-6 border-2 border-amber-400 bg-white shadow-lg animate-[fadeIn_0.2s_ease]">
           <div className="max-w-xl mx-auto text-center space-y-4">
-            <div className="w-12 h-12 mx-auto rounded-full bg-amber-100 border-2 border-amber-500 border-t-transparent animate-spin flex items-center justify-center text-xl">
-              🇮🇳
+            <div className="w-12 h-12 mx-auto rounded-full bg-amber-100 border-2 border-amber-500 border-t-transparent animate-spin flex items-center justify-center p-2">
+              <IndiaFlag className="w-6 h-4" />
             </div>
 
             <div>
@@ -183,7 +205,13 @@ export default function ProjectDetail({
                       : "text-slate-400 opacity-40"
                   }`}
                 >
-                  <span>{idx < analysisStep ? "✓" : "❯"}</span>
+                  <span className="shrink-0">
+                    {idx < analysisStep ? (
+                      <Check className="w-3.5 h-3.5 text-emerald-600 inline" />
+                    ) : (
+                      <ChevronRight className="w-3.5 h-3.5 text-amber-600 inline" />
+                    )}
+                  </span>
                   <span>{step}</span>
                 </div>
               ))}
@@ -214,14 +242,17 @@ export default function ProjectDetail({
                 </div>
                 <h2 className="text-2xl font-black text-[#0B193C] mb-2 font-sans">{p.name}</h2>
                 <div className="flex flex-wrap gap-2 text-xs">
-                  <span className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-800 font-medium">
-                    🏛️ {p.ministry}
+                  <span className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-800 font-medium flex items-center gap-1.5">
+                    <Building2 className="w-3.5 h-3.5 text-slate-600" />
+                    <span>{p.ministry}</span>
                   </span>
-                  <span className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-800 font-medium">
-                    🏗️ {p.sector}
+                  <span className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-800 font-medium flex items-center gap-1.5">
+                    <HardHat className="w-3.5 h-3.5 text-slate-600" />
+                    <span>{p.sector}</span>
                   </span>
-                  <span className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-800 font-medium">
-                    📍 State: {p.state}
+                  <span className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-800 font-medium flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-slate-600" />
+                    <span>State: {p.state}</span>
                   </span>
                   <span
                     className={`px-2.5 py-1 rounded-md font-bold border ${riskColor(
@@ -283,8 +314,9 @@ export default function ProjectDetail({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
             <div className="glass p-5 border border-slate-200 bg-white shadow-xs">
               <div className="flex items-center justify-between mb-1">
-                <div className="text-sm font-bold text-[#0B193C]">
-                  🔍 SHAP Driver Attribution Breakdown
+                <div className="text-sm font-bold text-[#0B193C] flex items-center gap-2">
+                  <SlidersHorizontal className="w-4 h-4 text-blue-900" />
+                  <span>SHAP Driver Attribution Breakdown</span>
                 </div>
                 <span className="text-[10px] font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">
                   XGBoost SHAP Framework
@@ -331,8 +363,9 @@ export default function ProjectDetail({
             </div>
 
             <div className="glass p-5 border border-slate-200 bg-white shadow-xs">
-              <div className="text-sm font-bold text-[#0B193C] mb-1">
-                📈 Physical Progress vs Expenditure Divergence Curve (18 Months)
+              <div className="text-sm font-bold text-[#0B193C] mb-1 flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-blue-900" />
+                <span>Physical Progress vs Expenditure Divergence Curve (18 Months)</span>
               </div>
               <div className="text-[11px] text-slate-500 mb-4">
                 Tracking site billing pace vs verified physical completion rate
@@ -384,7 +417,8 @@ export default function ProjectDetail({
           {/* Explainable warning text */}
           <div className="glass p-5 mb-5 border-l-4 border-amber-500 bg-amber-50/60 border border-amber-200">
             <div className="text-sm font-bold text-amber-950 mb-2 flex items-center gap-2">
-              <span>⚠️ Official Risk Synthesis & Audit Note</span>
+              <AlertTriangle className="w-4 h-4 text-amber-800 shrink-0" />
+              <span>Official Risk Synthesis & Audit Note</span>
             </div>
             <p className="text-xs text-slate-800 leading-relaxed font-sans font-medium">
               {prediction.explanationSummary}
@@ -395,8 +429,8 @@ export default function ProjectDetail({
           <div className="glass p-6 mb-5 border-l-4 border-purple-600 bg-purple-50/40 border border-purple-200 shadow-xs">
             <div className="flex items-center justify-between gap-4 mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-purple-100 border border-purple-300 flex items-center justify-center text-xl">
-                  🤖
+                <div className="w-10 h-10 rounded-xl bg-purple-100 border border-purple-300 flex items-center justify-center">
+                  <Cpu className="w-5 h-5 text-purple-700" />
                 </div>
                 <div>
                   <div className="text-sm font-bold text-purple-950">
@@ -433,10 +467,16 @@ export default function ProjectDetail({
                       }`}
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-[11px] mono font-bold text-purple-950 bg-purple-100 px-2 py-0.5 rounded border border-purple-200">
-                          🛠️ {t.tool}
+                        <span className="text-[11px] mono font-bold text-purple-950 bg-purple-100 px-2 py-0.5 rounded border border-purple-200 flex items-center gap-1.5">
+                          <Wrench className="w-3 h-3 text-purple-800" />
+                          <span>{t.tool}</span>
                         </span>
-                        {isUnlocked && <span className="text-xs text-emerald-700 font-bold">✓ BINDING SUCCESS</span>}
+                        {isUnlocked && (
+                          <span className="text-xs text-emerald-700 font-bold flex items-center gap-1">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                            <span>BINDING SUCCESS</span>
+                          </span>
+                        )}
                       </div>
                       <div className="text-xs text-slate-800 mt-1 font-medium">{t.result}</div>
                     </div>
@@ -456,7 +496,7 @@ export default function ProjectDetail({
                     key={i}
                     className="p-3 rounded-xl bg-emerald-50 border border-emerald-300 text-xs text-slate-900 flex items-start gap-2.5 font-medium"
                   >
-                    <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
+                    <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
                     <span className="leading-relaxed">{actionText}</span>
                   </div>
                 ))}

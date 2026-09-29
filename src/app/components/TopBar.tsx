@@ -1,9 +1,22 @@
 "use client";
 
 import { useProjects } from "@/app/lib/store";
+import IndiaFlag from "./IndiaFlag";
+import { HardHat, Building2, ShieldCheck, LogOut } from "lucide-react";
 
 export default function TopBar() {
   const { user, logout } = useProjects();
+
+  const getRoleIcon = (role?: string) => {
+    switch (role) {
+      case "contractor":
+        return <HardHat className="w-3.5 h-3.5 text-white" />;
+      case "officer":
+        return <Building2 className="w-3.5 h-3.5 text-white" />;
+      default:
+        return <ShieldCheck className="w-3.5 h-3.5 text-white" />;
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
@@ -14,8 +27,8 @@ export default function TopBar() {
       <div className="bg-[#0B193C] text-white py-1.5 px-6">
         <div className="max-w-[1600px] mx-auto flex items-center justify-between text-[11px]">
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 font-bold tracking-wide">
-              <span className="text-sm">🇮🇳</span> भारत सरकार | GOVERNMENT OF INDIA
+            <span className="flex items-center gap-2 font-bold tracking-wide">
+              <IndiaFlag className="w-4 h-3" /> भारत सरकार | GOVERNMENT OF INDIA
             </span>
             <span className="hidden sm:inline text-slate-500">|</span>
             <span className="hidden sm:inline text-slate-300 font-medium">
@@ -72,8 +85,8 @@ export default function TopBar() {
         {/* Right Section: Badges & Logged-in GOI Officer info */}
         <div className="flex items-center gap-3">
           {/* Digital India / Gati Shakti Badges */}
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-blue-50 border border-blue-200">
-            <span className="text-base">🇮🇳</span>
+          <div className="hidden lg:flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-blue-50 border border-blue-200">
+            <IndiaFlag className="w-4 h-3" />
             <div className="text-[10px] leading-tight">
               <span className="font-black text-blue-900 block">DIGITAL INDIA</span>
               <span className="text-slate-500 font-mono">GOVT OF INDIA</span>
@@ -91,8 +104,8 @@ export default function TopBar() {
           {/* User Session Pill */}
           {user && (
             <div className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl bg-slate-100 border border-slate-300 shadow-sm">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-500 to-blue-700 flex items-center justify-center text-xs font-bold text-white shadow">
-                {user.role === "contractor" ? "🏗️" : user.role === "officer" ? "🏛️" : "⚡"}
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-600 to-blue-800 flex items-center justify-center text-xs font-bold text-white shadow">
+                {getRoleIcon(user.role)}
               </div>
               <div className="text-left">
                 <div className="text-xs font-black text-slate-900 leading-none">
@@ -105,8 +118,9 @@ export default function TopBar() {
               <button
                 onClick={logout}
                 title="Sign out of GOI SSO"
-                className="text-[10px] font-bold text-red-600 hover:text-red-800 ml-1 px-1.5 py-0.5 rounded hover:bg-red-50 transition-colors"
+                className="text-[10px] font-bold text-red-600 hover:text-red-800 ml-1 px-2 py-1 rounded hover:bg-red-50 transition-colors flex items-center gap-1 border border-transparent hover:border-red-200"
               >
+                <LogOut className="w-2.5 h-2.5" />
                 Exit
               </button>
             </div>

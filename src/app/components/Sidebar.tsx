@@ -1,6 +1,17 @@
 "use client";
 
+import React from "react";
 import { useProjects } from "@/app/lib/store";
+import {
+  Landmark,
+  LayoutDashboard,
+  BookOpen,
+  HardHat,
+  Building2,
+  ShieldCheck,
+  PlusCircle,
+  LogOut,
+} from "lucide-react";
 
 export type PageKey =
   | "landing"
@@ -14,10 +25,16 @@ export type PageKey =
   | "references"
   | "project";
 
-const NAV: { key: PageKey; label: string; icon: string }[] = [
-  { key: "landing", label: "National Overview", icon: "🏛️" },
-  { key: "dashboard", label: "Mission Control", icon: "📊" },
-  { key: "about", label: "About Platform", icon: "📘" },
+interface NavItem {
+  key: PageKey;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const NAV: NavItem[] = [
+  { key: "landing", label: "National Overview", icon: Landmark },
+  { key: "dashboard", label: "Mission Control", icon: LayoutDashboard },
+  { key: "about", label: "About Platform", icon: BookOpen },
 ];
 
 export default function Sidebar({
@@ -33,6 +50,17 @@ export default function Sidebar({
 
   const canAddProject = user?.role === "contractor" || user?.role === "admin";
 
+  const getRoleIcon = (role?: string) => {
+    switch (role) {
+      case "contractor":
+        return <HardHat className="w-3.5 h-3.5 text-amber-700" />;
+      case "officer":
+        return <Building2 className="w-3.5 h-3.5 text-blue-700" />;
+      default:
+        return <ShieldCheck className="w-3.5 h-3.5 text-purple-700" />;
+    }
+  };
+
   // Get top 4 high-risk projects for sidebar live feed
   const liveAlerts = projects
     .filter((p) => p.riskScore >= 60)
@@ -44,25 +72,26 @@ export default function Sidebar({
       <nav className="glass p-3.5 space-y-1 sticky top-24 border border-slate-200 bg-white shadow-sm">
         {/* Government Officer Credentials Card */}
         {user && (
-          <div className="p-3 mb-3 rounded-xl bg-slate-50 border border-slate-200 shadow-xs">
-            <div className="flex items-center justify-between mb-1">
+          <div className="p-3 mb-3 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs">
+            <div className="flex items-center justify-between mb-1.5">
               <span className="text-[9px] font-bold text-amber-800 tracking-wider uppercase">
                 GOI AUTHORIZED USER
               </span>
               <button
                 onClick={logout}
-                className="text-[9px] font-bold text-red-600 hover:text-red-800 underline"
+                className="text-[9px] font-bold text-red-600 hover:text-red-800 flex items-center gap-0.5 hover:underline"
               >
+                <LogOut className="w-2.5 h-2.5" />
                 Sign Out
               </button>
             </div>
-            <div className="text-xs font-black text-slate-900 flex items-center gap-1.5 truncate">
-              <span>
-                {user.role === "contractor" ? "🏗️" : user.role === "officer" ? "🏛️" : "⚡"}
+            <div className="text-xs font-black text-slate-900 flex items-center gap-2 truncate">
+              <span className="shrink-0 p-1 rounded-md bg-white border border-slate-200 shadow-2xs">
+                {getRoleIcon(user.role)}
               </span>
               <span className="truncate">{user.name}</span>
             </div>
-            <div className="mt-1 flex items-center justify-between">
+            <div className="mt-2 flex items-center justify-between">
               <span className="inline-block px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-blue-100 text-blue-900 border border-blue-200">
                 {user.role}
               </span>
@@ -75,9 +104,10 @@ export default function Sidebar({
         {canAddProject && (
           <button
             onClick={onOpenAddProject}
-            className="w-full py-2.5 px-3 mb-3 rounded-xl bg-[#0B193C] hover:bg-blue-900 text-white text-xs font-bold shadow-sm flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]"
+            className="w-full py-2.5 px-3 mb-3 rounded-xl bg-[#0B193C] hover:bg-blue-900 text-white text-xs font-bold shadow-sm flex items-center justify-center gap-2 transition-all transform active:scale-[0.98] cursor-pointer"
           >
-            <span>➕ Ingest Infrastructure Data</span>
+            <PlusCircle className="w-3.5 h-3.5 text-blue-200" />
+            <span>Ingest Infrastructure Data</span>
           </button>
         )}
 
@@ -88,6 +118,7 @@ export default function Sidebar({
         </div>
 
         {NAV.map((item) => {
+          const Icon = item.icon;
           const active =
             current === item.key ||
             (current === "project" && item.key === "dashboard") ||
@@ -105,13 +136,13 @@ export default function Sidebar({
             <button
               key={item.key}
               onClick={() => onNavigate(item.key)}
-              className={`w-full text-left px-3 py-2.5 rounded-xl text-xs font-medium flex items-center gap-3 transition-all ${
+              className={`w-full text-left px-3 py-2.5 rounded-xl text-xs font-medium flex items-center gap-3 transition-all cursor-pointer ${
                 active
-                  ? "bg-blue-50 border-l-[4px] border-[#FF9933] text-[#0B193C] font-bold shadow-xs"
+                  ? "bg-blue-50 border-l-[4px] border-[#FF9933] text-[#0B193C] font-bold shadow-2xs"
                   : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
               }`}
             >
-              <span>{item.icon}</span>
+              <Icon className={`w-4 h-4 shrink-0 ${active ? "text-[#0B193C]" : "text-slate-500"}`} />
               <span className="truncate">{item.label}</span>
             </button>
           );

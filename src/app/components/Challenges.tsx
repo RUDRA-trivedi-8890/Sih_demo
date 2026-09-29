@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowRight, ShieldCheck } from "lucide-react";
+
 export default function Challenges() {
   const items = [
     {
@@ -31,27 +33,32 @@ export default function Challenges() {
   return (
     <div className="animate-[fadeUp_0.4s_ease]">
       <div className="mb-6">
-        <h2 className="text-2xl font-black text-white">
-          Challenges & Mitigations
-        </h2>
+        <div className="flex items-center gap-2 mb-1">
+          <ShieldCheck className="w-5 h-5 text-blue-400" />
+          <h2 className="text-2xl font-black text-white">
+            Challenges & Mitigations
+          </h2>
+        </div>
         <p className="text-sm text-slate-400">
           How we address real-world data and modeling issues
         </p>
       </div>
 
-      <div className="glass overflow-hidden">
+      <div className="glass overflow-hidden rounded-xl border border-slate-700/60">
         <div className="grid grid-cols-[1fr_40px_1fr] bg-slate-900/60 px-5 py-3 border-b border-slate-700 text-xs font-bold text-slate-300">
           <div>CHALLENGE</div>
-          <div className="text-center">→</div>
+          <div className="text-center font-mono">FLOW</div>
           <div>MITIGATION</div>
         </div>
         {items.map((it, i) => (
           <div
             key={i}
-            className="grid grid-cols-[1fr_40px_1fr] px-5 py-4 border-b border-slate-800/60 last:border-0 hover:bg-blue-500/5 transition-colors"
+            className="grid grid-cols-[1fr_40px_1fr] items-center px-5 py-4 border-b border-slate-800/60 last:border-0 hover:bg-blue-500/5 transition-colors"
           >
-            <div className="text-sm text-slate-300">{it.c}</div>
-            <div className="text-center text-blue-400">➜</div>
+            <div className="text-sm text-slate-300 font-medium">{it.c}</div>
+            <div className="flex justify-center">
+              <ArrowRight className="w-4 h-4 text-blue-400" />
+            </div>
             <div className="text-sm text-emerald-200">{it.m}</div>
           </div>
         ))}

@@ -5,6 +5,33 @@ import { useProjects } from "@/app/lib/store";
 import { generateMcpAnalysis } from "@/app/lib/mcp";
 import { runFullPrediction } from "@/app/lib/predict";
 import { PIPELINE_STEPS } from "@/app/lib/mockData";
+import {
+  Globe,
+  Workflow,
+  Database,
+  Bot,
+  TrendingUp,
+  ShieldCheck,
+  BookOpen,
+  Cpu,
+  Target,
+  Clock,
+  Sliders,
+  Info,
+  Layers,
+  Wrench,
+  Check,
+  CheckCircle2,
+  XCircle,
+  Zap,
+  Search,
+  Compass,
+  BarChart3,
+  ShieldAlert,
+  ArrowRight,
+  ExternalLink,
+  Building2,
+} from "lucide-react";
 
 export type AboutTab =
   | "all"
@@ -132,7 +159,8 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
 
   const referenceGroups = [
     {
-      title: "🏛️ GOVERNMENT POLICY & DATA ECOSYSTEM",
+      icon: Building2,
+      title: "GOVERNMENT POLICY & DATA ECOSYSTEM",
       badge: "GOI OFFICIAL",
       items: [
         {
@@ -150,7 +178,8 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
       ],
     },
     {
-      title: "🧠 PREDICTIVE ML & MODEL EXPLAINABILITY (XAI)",
+      icon: Cpu,
+      title: "PREDICTIVE ML & MODEL EXPLAINABILITY (XAI)",
       badge: "ACADEMIC PEER-REVIEWED",
       items: [
         {
@@ -168,7 +197,8 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
       ],
     },
     {
-      title: "📐 INFRASTRUCTURE RISK & COST ESCALATION LITERATURE",
+      icon: BookOpen,
+      title: "INFRASTRUCTURE RISK & COST ESCALATION LITERATURE",
       badge: "INDUSTRY BENCHMARKS",
       items: [
         {
@@ -183,14 +213,14 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
     },
   ];
 
-  const tabs: { key: AboutTab; label: string; icon: string }[] = [
-    { key: "all", label: "Complete Overview", icon: "🌐" },
-    { key: "pipeline", label: "ML & Risk Pipeline", icon: "⚙️" },
-    { key: "data", label: "3-Tier Data Layers", icon: "🗄️" },
-    { key: "mcp", label: "MCP Prescriptive Agent", icon: "🤖" },
-    { key: "impact", label: "Impact & Comparison", icon: "📈" },
-    { key: "challenges", label: "Challenges & Mitigations", icon: "🛡️" },
-    { key: "references", label: "Policy & References", icon: "📚" },
+  const tabs: { key: AboutTab; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
+    { key: "all", label: "Complete Overview", icon: Globe },
+    { key: "pipeline", label: "ML & Risk Pipeline", icon: Workflow },
+    { key: "data", label: "3-Tier Data Layers", icon: Database },
+    { key: "mcp", label: "MCP Prescriptive Agent", icon: Bot },
+    { key: "impact", label: "Impact & Comparison", icon: TrendingUp },
+    { key: "challenges", label: "Challenges & Mitigations", icon: ShieldCheck },
+    { key: "references", label: "Policy & References", icon: BookOpen },
   ];
 
   return (
@@ -260,6 +290,7 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
           {tabs.map((t) => {
             const isActive = activeTab === t.key;
+            const Icon = t.icon;
             return (
               <button
                 key={t.key}
@@ -267,13 +298,13 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
                   setActiveTab(t.key);
                   window.scrollTo({ top: 180, behavior: "smooth" });
                 }}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                   isActive
                     ? "bg-[#0B193C] text-white shadow-sm"
                     : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                 }`}
               >
-                <span>{t.icon}</span>
+                <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-blue-200" : "text-slate-500"}`} />
                 <span>{t.label}</span>
               </button>
             );
@@ -286,7 +317,7 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
         <section id="section-pipeline" className="space-y-5">
           <div className="flex items-center justify-between pb-2 border-b border-slate-200">
             <div className="flex items-center gap-2.5">
-              <span className="text-2xl">⚙️</span>
+              <Cpu className="w-6 h-6 text-blue-900" />
               <div>
                 <h2 className="text-xl font-black text-[#0B193C]">
                   Technical ML & Risk Architecture
@@ -304,13 +335,16 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
           {/* Pipeline Horizontal Flow */}
           <div className="glass p-5 border border-slate-200 bg-white shadow-xs overflow-x-auto">
             <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
-              <span>🔄 Sequenced Data Processing & Inference Pipeline</span>
+              <Workflow className="w-4 h-4 text-blue-900" />
+              <span>Sequenced Data Processing & Inference Pipeline</span>
             </div>
             <div className="flex items-center gap-2 min-w-max pb-2">
               {PIPELINE_STEPS.map((s, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <div className="w-36 p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-500 hover:shadow-xs transition-all text-center">
-                    <div className="text-2xl mb-1">{s.icon}</div>
+                    <div className="w-7 h-7 mx-auto mb-2 rounded-full bg-blue-100 text-blue-900 flex items-center justify-center text-xs font-mono font-bold border border-blue-200">
+                      {s.step}
+                    </div>
                     <div className="text-[11px] font-bold text-slate-900 leading-tight">
                       {s.title}
                     </div>
@@ -319,7 +353,7 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
                     </div>
                   </div>
                   {i < PIPELINE_STEPS.length - 1 && (
-                    <div className="text-blue-500 text-base font-bold">→</div>
+                    <ArrowRight className="w-4 h-4 text-blue-400 shrink-0" />
                   )}
                 </div>
               ))}
@@ -331,8 +365,9 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
             {/* Cost Overrun */}
             <div className="glass p-5 border-t-4 border-amber-500 bg-white border border-slate-200 shadow-xs">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-black text-amber-900 tracking-wider">
-                  🎯 COST OVERRUN PREDICTOR
+                <span className="text-xs font-black text-amber-900 tracking-wider flex items-center gap-1.5">
+                  <Target className="w-3.5 h-3.5 text-amber-800" />
+                  <span>COST OVERRUN PREDICTOR</span>
                 </span>
                 <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">
                   REGRESSION
@@ -372,8 +407,9 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
             {/* Time Overrun */}
             <div className="glass p-5 border-t-4 border-cyan-600 bg-white border border-slate-200 shadow-xs">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-black text-cyan-900 tracking-wider">
-                  ⏱️ SCHEDULE OVERRUN PREDICTOR
+                <span className="text-xs font-black text-cyan-900 tracking-wider flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-cyan-800" />
+                  <span>SCHEDULE OVERRUN PREDICTOR</span>
                 </span>
                 <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-cyan-100 text-cyan-800">
                   MONTHLY LEAD
@@ -404,8 +440,9 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
             {/* Risk Engine + XAI */}
             <div className="glass p-5 border-t-4 border-purple-600 bg-white border border-slate-200 shadow-xs">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-black text-purple-900 tracking-wider">
-                  🎲 RISK ENGINE + EXPLAINABLE AI
+                <span className="text-xs font-black text-purple-900 tracking-wider flex items-center gap-1.5">
+                  <Sliders className="w-3.5 h-3.5 text-purple-800" />
+                  <span>RISK ENGINE + EXPLAINABLE AI</span>
                 </span>
                 <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800">
                   SHAP XAI
@@ -435,7 +472,7 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
           </div>
 
           <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-950 flex items-start gap-3 shadow-xs">
-            <span className="text-lg">💡</span>
+            <Info className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
             <div>
               <span className="font-bold">MODEL GOVERNANCE FRAMEWORK:</span> Model selection is continuous and performance-driven. LightGBM ensembles are routinely evaluated against temporal deep architectures (LSTM / Temporal Transformers) with automated retraining upon monthly PAIMANA data releases.
             </div>
@@ -448,7 +485,7 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
         <section id="section-data" className="space-y-5">
           <div className="flex items-center justify-between pb-2 border-b border-slate-200">
             <div className="flex items-center gap-2.5">
-              <span className="text-2xl">🗄️</span>
+              <Database className="w-6 h-6 text-blue-900" />
               <div>
                 <h2 className="text-xl font-black text-[#0B193C]">
                   Three-Tier Data Architecture
@@ -539,8 +576,9 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
 
           {/* Feasibility Summary */}
           <div className="glass p-5 border border-slate-200 bg-white shadow-xs">
-            <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
-              🏛️ System Feasibility & Stack Overview
+            <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
+              <Layers className="w-4 h-4 text-blue-900" />
+              <span>System Feasibility & Stack Overview</span>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center">
@@ -572,8 +610,10 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
       {(activeTab === "all" || activeTab === "mcp") && (
         <section id="section-mcp" className="space-y-5">
           <div className="flex items-center justify-between pb-2 border-b border-slate-200">
-            <div className="flex items-center gap-2.5">
-              <span className="text-2xl">🤖</span>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
+                <Bot className="w-5 h-5 text-purple-900" />
+              </div>
               <div>
                 <h2 className="text-xl font-black text-[#0B193C]">
                   Model Context Protocol (MCP) Prescriptive Governance Agent
@@ -634,7 +674,10 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
             <div className="glass p-5 border-t-4 border-blue-600 bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
               <div>
                 <div className="text-xs font-black text-blue-900 mb-3 flex items-center justify-between">
-                  <span>🛠️ EXECUTED MCP TOOLS</span>
+                  <span className="flex items-center gap-1.5">
+                    <Wrench className="w-3.5 h-3.5 text-blue-900" />
+                    EXECUTED MCP TOOLS
+                  </span>
                   <span className="text-[10px] font-mono text-blue-700 font-bold">
                     {toolStep}/{mcp?.toolsExecuted.length || 0} Active
                   </span>
@@ -656,8 +699,8 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
                             {t.tool}
                           </span>
                           {isLit && (
-                            <span className="text-[9px] font-bold text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded border border-emerald-300">
-                              ✓ EXECUTED
+                            <span className="text-[9px] font-bold text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded border border-emerald-300 flex items-center gap-1">
+                              <Check className="w-2.5 h-2.5" /> EXECUTED
                             </span>
                           )}
                         </div>
@@ -677,8 +720,9 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
             {/* Column 2: LLM Agent */}
             <div className="glass p-5 border-t-4 border-purple-600 bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
               <div>
-                <div className="text-xs font-black text-purple-900 mb-3 text-center">
-                  🤖 LLM GOVERNANCE REASONING
+                <div className="text-xs font-black text-purple-900 mb-3 text-center flex items-center justify-center gap-1.5">
+                  <Bot className="w-4 h-4 text-purple-800" />
+                  <span>LLM GOVERNANCE REASONING</span>
                 </div>
                 <div className="p-4 rounded-xl bg-purple-50 border border-purple-200 space-y-3">
                   <div className="text-xs text-slate-800 leading-relaxed font-medium">
@@ -707,7 +751,10 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
             <div className="glass p-5 border-t-4 border-emerald-600 bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
               <div>
                 <div className="text-xs font-black text-emerald-900 mb-3 flex items-center justify-between">
-                  <span>✅ MANDATED DIRECTIVES</span>
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-800" />
+                    MANDATED DIRECTIVES
+                  </span>
                   <span className="text-[10px] font-mono text-emerald-700 font-bold">
                     {actionStep}/{mcp?.recommendedActions.length || 0} Ready
                   </span>
@@ -724,7 +771,7 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
                             : "bg-slate-50 border-slate-200 opacity-30"
                         }`}
                       >
-                        <span className="text-emerald-700 font-bold shrink-0">✓</span>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 shrink-0 mt-0.5" />
                         <span className="leading-snug">{action}</span>
                       </div>
                     );
@@ -743,8 +790,10 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
       {(activeTab === "all" || activeTab === "impact") && (
         <section id="section-impact" className="space-y-5">
           <div className="flex items-center justify-between pb-2 border-b border-slate-200">
-            <div className="flex items-center gap-2.5">
-              <span className="text-2xl">📈</span>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
+                <TrendingUp className="w-5 h-5 text-blue-900" />
+              </div>
               <div>
                 <h2 className="text-xl font-black text-[#0B193C]">
                   Socio-Economic Impact & Benefits
@@ -759,15 +808,16 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
             </span>
           </div>
 
-
           {/* Comparison Matrix */}
           <div className="glass overflow-hidden border border-slate-200 bg-white shadow-xs rounded-xl">
             <div className="grid grid-cols-2">
               <div className="bg-red-50 px-5 py-3 text-xs font-black text-red-900 border-b border-red-200 flex items-center gap-2">
-                <span>❌</span> CURRENT / PASSIVE APPROACH
+                <XCircle className="w-4 h-4 text-red-600 shrink-0" />
+                <span>CURRENT / PASSIVE APPROACH</span>
               </div>
               <div className="bg-emerald-50 px-5 py-3 text-xs font-black text-emerald-900 border-b border-emerald-200 flex items-center gap-2">
-                <span>✅</span> OUR PREDICTIVE RISK ENGINE
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>OUR PREDICTIVE RISK ENGINE</span>
               </div>
             </div>
             {[
@@ -804,52 +854,58 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
 
           {/* Strategic Benefit Cards */}
           <div>
-            <div className="text-xs font-bold text-slate-700 tracking-wider mb-3 uppercase">
-              🏛️ Six Pillars of Strategic Value for Government of India
+            <div className="text-xs font-bold text-slate-700 tracking-wider mb-3 uppercase flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-blue-900" />
+              <span>Six Pillars of Strategic Value for Government of India</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
                 {
-                  icon: "⚡",
+                  icon: Zap,
                   title: "Early Risk Detection",
                   desc: "Identifies capital expenditure and schedule risks 6–12 months before contractual slippage occurs on the ground.",
                 },
                 {
-                  icon: "🔍",
+                  icon: Search,
                   title: "Explainable AI (SHAP)",
                   desc: "Provides legally robust, actionable rationales rather than an opaque, untrusted risk rating score.",
                 },
                 {
-                  icon: "🎯",
+                  icon: Target,
                   title: "Prioritized Action",
                   desc: "Directs limited ministry nodal audit and monitoring resources to the top high-risk red-flagged projects first.",
                 },
                 {
-                  icon: "🧭",
+                  icon: Compass,
                   title: "Causal Attribution",
                   desc: "Pinpoints root cause bottlenecks across budget disbursals, land acquisition clearances, and commodity price spikes.",
                 },
                 {
-                  icon: "📊",
+                  icon: BarChart3,
                   title: "National Benchmarking",
                   desc: "Compares delivery performance objectively across 17 ministries, 22 sectors, and all 28 states and 8 union territories.",
                 },
                 {
-                  icon: "🚀",
+                  icon: Layers,
                   title: "Scalable Intelligence",
                   desc: "Establishes a plug-and-play, extensible architecture that enhances existing PAIMANA workflows without costly replacement.",
                 },
-              ].map((b, i) => (
-                <div key={i} className="glass p-5 border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs transition-all">
-                  <div className="text-2xl mb-2">{b.icon}</div>
-                  <div className="text-xs font-black text-slate-900 mb-1">
-                    {b.title}
+              ].map((b, i) => {
+                const IconComponent = b.icon;
+                return (
+                  <div key={i} className="glass p-5 border border-slate-200 bg-white hover:border-blue-400 hover:shadow-xs transition-all">
+                    <div className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center mb-3">
+                      <IconComponent className="w-5 h-5 text-blue-900" />
+                    </div>
+                    <div className="text-xs font-black text-slate-900 mb-1">
+                      {b.title}
+                    </div>
+                    <div className="text-xs text-slate-600 leading-relaxed font-normal">
+                      {b.desc}
+                    </div>
                   </div>
-                  <div className="text-xs text-slate-600 leading-relaxed font-normal">
-                    {b.desc}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -859,8 +915,10 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
       {(activeTab === "all" || activeTab === "challenges") && (
         <section id="section-challenges" className="space-y-5">
           <div className="flex items-center justify-between pb-2 border-b border-slate-200">
-            <div className="flex items-center gap-2.5">
-              <span className="text-2xl">🛡️</span>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-rose-50 border border-rose-200 flex items-center justify-center shrink-0">
+                <ShieldAlert className="w-5 h-5 text-rose-900" />
+              </div>
               <div>
                 <h2 className="text-xl font-black text-[#0B193C]">
                   Challenges & Engineered Mitigations
@@ -878,7 +936,7 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
           <div className="glass overflow-hidden border border-slate-200 bg-white shadow-xs rounded-xl">
             <div className="grid grid-cols-[1.2fr_40px_1.5fr_120px] bg-slate-100 px-5 py-3 border-b border-slate-200 text-[11px] font-black text-slate-700 uppercase">
               <div>IDENTIFIED REAL-WORLD CHALLENGE</div>
-              <div className="text-center">→</div>
+              <div className="text-center text-[10px] font-bold text-slate-400">FLOW</div>
               <div>ENGINEERED ARCHITECTURAL MITIGATION</div>
               <div className="text-right">OUTCOME</div>
             </div>
@@ -890,7 +948,9 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
                 <div className="text-xs font-semibold text-slate-900">
                   {it.c}
                 </div>
-                <div className="text-center text-blue-600 font-bold">➜</div>
+                <div className="flex items-center justify-center">
+                  <ArrowRight className="w-3.5 h-3.5 text-blue-600" />
+                </div>
                 <div className="text-xs text-slate-700 leading-snug">
                   {it.m}
                 </div>
@@ -909,8 +969,10 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
       {(activeTab === "all" || activeTab === "references") && (
         <section id="section-references" className="space-y-5">
           <div className="flex items-center justify-between pb-2 border-b border-slate-200">
-            <div className="flex items-center gap-2.5">
-              <span className="text-2xl">📚</span>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-cyan-50 border border-cyan-200 flex items-center justify-center shrink-0">
+                <BookOpen className="w-5 h-5 text-cyan-950" />
+              </div>
               <div>
                 <h2 className="text-xl font-black text-[#0B193C]">
                   Ministry Policy References & Verification
@@ -929,7 +991,8 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
             {referenceGroups.map((g, i) => (
               <div key={i} className="glass p-5 border border-slate-200 bg-white shadow-xs rounded-xl">
                 <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
-                  <span className="text-xs font-black text-[#0B193C] tracking-wide">
+                  <span className="text-xs font-black text-[#0B193C] tracking-wide flex items-center gap-2">
+                    <g.icon className="w-4 h-4 text-blue-900" />
                     {g.title}
                   </span>
                   <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
@@ -958,7 +1021,8 @@ export default function AboutPlatform({ initialTab = "all" }: AboutPlatformProps
           {/* Verification Links */}
           <div className="glass p-5 border-l-4 border-emerald-600 bg-white border border-slate-200 shadow-xs rounded-xl">
             <div className="text-xs font-black text-emerald-950 mb-3 flex items-center gap-2">
-              <span>🔗</span> OFFICIAL VERIFICATION PORTALS & REPOSITORIES
+              <ExternalLink className="w-4 h-4 text-emerald-800 shrink-0" />
+              <span>OFFICIAL VERIFICATION PORTALS & REPOSITORIES</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
               <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200">

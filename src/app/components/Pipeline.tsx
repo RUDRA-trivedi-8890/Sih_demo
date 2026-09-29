@@ -1,5 +1,6 @@
 "use client";
 import { PIPELINE_STEPS } from "@/app/lib/mockData";
+import { Target, Clock, Sliders, ArrowRight } from "lucide-react";
 
 export default function Pipeline() {
   return (
@@ -17,14 +18,16 @@ export default function Pipeline() {
           {PIPELINE_STEPS.map((s, i) => (
             <div key={i} className="flex items-center gap-2">
               <div className="w-40 p-3 rounded-xl bg-slate-900/60 border border-blue-500/30 hover:border-blue-500 transition-all text-center">
-                <div className="text-2xl mb-1">{s.icon}</div>
+                <div className="w-7 h-7 mx-auto mb-2 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs font-mono font-bold border border-blue-500/40">
+                  {s.step}
+                </div>
                 <div className="text-[11px] font-bold text-slate-200 leading-tight">
                   {s.title}
                 </div>
-                <div className="text-[9px] text-slate-500 mt-1">{s.sub}</div>
+                <div className="text-[9px] text-slate-500 mt-1 font-mono">{s.sub}</div>
               </div>
               {i < PIPELINE_STEPS.length - 1 && (
-                <div className="text-blue-500 text-xl">→</div>
+                <ArrowRight className="w-4 h-4 text-blue-500 shrink-0" />
               )}
             </div>
           ))}
@@ -34,8 +37,9 @@ export default function Pipeline() {
       {/* Three model cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
         <div className="glass p-5 border-t-4 border-orange-500">
-          <div className="text-sm font-bold text-orange-300 mb-3">
-            🎯 COST OVERRUN MODEL
+          <div className="text-sm font-bold text-orange-300 mb-3 flex items-center gap-2">
+            <Target className="w-4 h-4 text-orange-400" />
+            <span>COST OVERRUN MODEL</span>
           </div>
           <div className="space-y-3">
             <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30">
@@ -66,8 +70,9 @@ export default function Pipeline() {
         </div>
 
         <div className="glass p-5 border-t-4 border-cyan-500">
-          <div className="text-sm font-bold text-cyan-300 mb-3">
-            ⏱️ TIME OVERRUN MODEL
+          <div className="text-sm font-bold text-cyan-300 mb-3 flex items-center gap-2">
+            <Clock className="w-4 h-4 text-cyan-400" />
+            <span>SCHEDULE OVERRUN MODEL</span>
           </div>
           <div className="space-y-3 text-xs">
             <div className="p-3 rounded-lg bg-slate-800/40">
@@ -97,8 +102,9 @@ export default function Pipeline() {
         </div>
 
         <div className="glass p-5 border-t-4 border-purple-500">
-          <div className="text-sm font-bold text-purple-300 mb-3">
-            🎲 RISK ENGINE + XAI
+          <div className="text-sm font-bold text-purple-300 mb-3 flex items-center gap-2">
+            <Sliders className="w-4 h-4 text-purple-400" />
+            <span>RISK ENGINE + XAI</span>
           </div>
           <div className="space-y-3 text-xs">
             <div className="p-3 rounded-lg bg-slate-800/40">
