@@ -5,6 +5,7 @@ import { useProjects } from "@/app/lib/store";
 export type PageKey =
   | "landing"
   | "dashboard"
+  | "about"
   | "pipeline"
   | "data"
   | "mcp"
@@ -16,12 +17,7 @@ export type PageKey =
 const NAV: { key: PageKey; label: string; icon: string }[] = [
   { key: "landing", label: "National Overview", icon: "🏛️" },
   { key: "dashboard", label: "Mission Control", icon: "📊" },
-  { key: "pipeline", label: "ML & Risk Architecture", icon: "⚙️" },
-  { key: "data", label: "PAIMANA Data Layers", icon: "🗄️" },
-  { key: "mcp", label: "MCP Prescriptive Agent", icon: "🤖" },
-  { key: "impact", label: "Socio-Economic Impact", icon: "📈" },
-  { key: "challenges", label: "Risk Factors & Mitigation", icon: "🛡️" },
-  { key: "references", label: "Ministry Policy References", icon: "📚" },
+  { key: "about", label: "About Platform", icon: "📘" },
 ];
 
 export default function Sidebar({
@@ -94,7 +90,17 @@ export default function Sidebar({
         {NAV.map((item) => {
           const active =
             current === item.key ||
-            (current === "project" && item.key === "dashboard");
+            (current === "project" && item.key === "dashboard") ||
+            (item.key === "about" &&
+              [
+                "about",
+                "pipeline",
+                "data",
+                "mcp",
+                "impact",
+                "challenges",
+                "references",
+              ].includes(current));
           return (
             <button
               key={item.key}

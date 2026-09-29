@@ -7,12 +7,7 @@ import Sidebar, { PageKey } from "./components/Sidebar";
 import LandingPage from "./components/LandingPage";
 import Dashboard from "./components/Dashboard";
 import ProjectDetail from "./components/ProjectDetail";
-import Pipeline from "./components/Pipeline";
-import DataLayers from "./components/DataLayers";
-import MCPPage from "./components/MCPPage";
-import Impact from "./components/Impact";
-import Challenges from "./components/Challenges";
-import References from "./components/References";
+import AboutPlatform, { AboutTab } from "./components/AboutPlatform";
 import Login from "./components/Login";
 import AddProjectModal from "./components/AddProjectModal";
 
@@ -66,12 +61,26 @@ function AppContent() {
               onBack={() => handleNavigate("dashboard")}
             />
           )}
-          {page === "pipeline" && <Pipeline />}
-          {page === "data" && <DataLayers />}
-          {page === "mcp" && <MCPPage />}
-          {page === "impact" && <Impact />}
-          {page === "challenges" && <Challenges />}
-          {page === "references" && <References />}
+          {(page === "about" ||
+            page === "pipeline" ||
+            page === "data" ||
+            page === "mcp" ||
+            page === "impact" ||
+            page === "challenges" ||
+            page === "references") && (
+            <AboutPlatform
+              initialTab={
+                (page === "pipeline" ||
+                page === "data" ||
+                page === "mcp" ||
+                page === "impact" ||
+                page === "challenges" ||
+                page === "references"
+                  ? page
+                  : "all") as AboutTab
+              }
+            />
+          )}
         </main>
       </div>
 
